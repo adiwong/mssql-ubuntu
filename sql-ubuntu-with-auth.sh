@@ -12,7 +12,9 @@ curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /et
 
 # Install updates
 sudo apt-get update
-sudo apt-get install -y mssql-server
+
+# The latest version is causing connection issue
+sudo apt-get install mssql-server=14.0.3192.2-2
 
 
 sleep 2
@@ -29,3 +31,10 @@ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
 sudo systemctl restart mssql-server
 
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $mssqlPassword -Q "USE MASTER; ALTER LOGIN sa WITH NAME = [$mssqlAdmin];"
+
+# limiting ports
+sudo ufw default deny incoming 
+sudo ufw allow 22
+sudo ufw allow 53
+sudo ufw allow 1433
+echo "y" | sudo ufw enable
