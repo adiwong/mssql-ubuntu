@@ -14,7 +14,7 @@ curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /et
 sudo apt-get update
 
 # The latest version is causing connection issue
-sudo apt-get install mssql-server=14.0.3192.2-2
+sudo apt-get -y install mssql-server=14.0.3192.2-2
 
 
 sleep 2
