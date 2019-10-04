@@ -13,9 +13,11 @@ curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /et
 # Install updates
 sudo apt-get update
 
-# The latest version is causing connection issue
+# The latest version is causing connection issue therefore specifying a version before
 sudo apt-get -y install mssql-server=14.0.3192.2-2
 
+# Install the full test search feature
+sudo apt-get -y install mssql-server-fts
 
 sleep 2
 sudo MSSQL_SA_PASSWORD=$mssqlPassword \
